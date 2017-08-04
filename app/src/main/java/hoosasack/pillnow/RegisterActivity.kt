@@ -3,8 +3,11 @@ package hoosasack.pillnow
 import android.animation.PropertyValuesHolder
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -13,10 +16,18 @@ class RegisterActivity : AppCompatActivity() {
         super.getActionBar().setCustomView(R.id.custom_actionbar_base)
         setContentView(R.layout.activity_register)
 
-        val spinner : Spinner = findViewById(R.id.spinner) as Spinner
-        var str : Array<String> = resources.getStringArray(R.array.age)
-        val spinnerAdapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,str)
-        spinner.adapter(spinnerAdapter)
+        var agePosition : Int
 
+        var str = (resources.getStringArray(R.array.age))
+        spinner.adapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,str)
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                agePosition = position
+            }
+        }
     }
 }

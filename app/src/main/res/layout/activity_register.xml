@@ -67,5 +67,17 @@
         android:layout_height="wrap_content"
         android:id="@+id/spinner"></Spinner>
 
+    <android.support.v4.widget.Space
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+
+    <Button
+        android:id="@+id/register"
+        android:text="회원가입"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+
 
 </LinearLayout>

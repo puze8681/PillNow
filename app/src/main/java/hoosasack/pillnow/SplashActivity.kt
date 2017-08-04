@@ -30,13 +30,13 @@ class SplashActivity : AppCompatActivity() {
 
     }
 
-    fun onAttatchedToWindow(){
+    override fun onAttachedToWindow(): Unit{
         super.onAttachedToWindow()
         val window : Window = window
         window.setFormat(PixelFormat.RGBA_8888)
     }
 
-    fun startAnimations(){
+    fun startAnimations(): Unit{
 
         val linlayout : LinearLayout = findViewById(R.id.activity_splash) as LinearLayout
         val animlayout : LinearLayout = findViewById(R.id.anim_layout) as LinearLayout
