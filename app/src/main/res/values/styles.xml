@@ -8,4 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="EditTextLoginStyle" parent="Widget.AppCompat.EditText">
+        <item name="colorControlNormal">@color/underBarOrange</item>
+        <item name="android:textCursorDrawable">@color/black</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorHighlight">@color/white</item>
+    </style>
+
 </resources>

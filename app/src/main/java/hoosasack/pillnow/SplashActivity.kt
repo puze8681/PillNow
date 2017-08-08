@@ -39,18 +39,15 @@ class SplashActivity : AppCompatActivity() {
     fun startAnimations(): Unit{
 
         val linlayout : LinearLayout = findViewById(R.id.activity_splash) as LinearLayout
-        val animlayout : LinearLayout = findViewById(R.id.anim_layout) as LinearLayout
+        val animlayout : LinearLayout = findViewById(R.id.login_layout) as LinearLayout
+        val logo : ImageView = findViewById(R.id.logo) as ImageView
 
         anim = AnimationUtils.loadAnimation(this, R.anim.alpha)
         anim.reset()
         linlayout.clearAnimation()
+        logo.clearAnimation()
         linlayout.startAnimation(anim)
-
-        anim = AnimationUtils.loadAnimation(this, R.anim.translate)
-        anim.reset()
-
-        animlayout.clearAnimation()
-        animlayout.startAnimation(anim)
+        logo.startAnimation(anim)
 
         val thread : Thread = Thread {
             try {
