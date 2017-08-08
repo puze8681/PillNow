@@ -17,7 +17,7 @@ import java.lang.Thread.sleep
 
 class SplashActivity : AppCompatActivity() {
 
-
+    lateinit var anim : Animation
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,8 +40,8 @@ class SplashActivity : AppCompatActivity() {
 
         val linlayout : LinearLayout = findViewById(R.id.activity_splash) as LinearLayout
         val animlayout : LinearLayout = findViewById(R.id.anim_layout) as LinearLayout
-        var anim : Animation = AnimationUtils.loadAnimation(this, R.anim.alpha)
 
+        anim = AnimationUtils.loadAnimation(this, R.anim.alpha)
         anim.reset()
         linlayout.clearAnimation()
         linlayout.startAnimation(anim)
