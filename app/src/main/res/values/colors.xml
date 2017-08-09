@@ -6,4 +6,9 @@
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="underBarOrange">#F55836</color>
+    <color name="gradationStart">#ff9f58</color>
+    <color name="gradationEnd">#f54735</color>
+    <color name="orange">#fa6f45</color>
+    <color name="hintGray">#cccccc</color>
+
 </resources>

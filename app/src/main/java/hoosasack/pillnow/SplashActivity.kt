@@ -1,10 +1,13 @@
 package hoosasack.pillnow
 
+import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.PixelFormat
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.support.annotation.ColorInt
 import android.view.Window
 import android.view.WindowManager
 import android.view.animation.Animation
@@ -21,11 +24,12 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
 
         //전체화면 만들기
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        setContentView(R.layout.activity_splash)
+
         startAnimations()
 
     }
@@ -40,14 +44,14 @@ class SplashActivity : AppCompatActivity() {
 
         val linlayout : LinearLayout = findViewById(R.id.activity_splash) as LinearLayout
         val animlayout : LinearLayout = findViewById(R.id.login_layout) as LinearLayout
-        val logo : ImageView = findViewById(R.id.logo) as ImageView
+        val icon : ImageView = findViewById(R.id.icon) as ImageView
 
         anim = AnimationUtils.loadAnimation(this, R.anim.alpha)
         anim.reset()
-        linlayout.clearAnimation()
-        logo.clearAnimation()
-        linlayout.startAnimation(anim)
-        logo.startAnimation(anim)
+        animlayout.clearAnimation()
+        icon.clearAnimation()
+        animlayout.startAnimation(anim)
+        icon.startAnimation(anim)
 
         val thread : Thread = Thread {
             try {
@@ -56,27 +60,15 @@ class SplashActivity : AppCompatActivity() {
                     sleep(100)
                     term += 100
                 }
-                val loginIntent = Intent(this, LoginActivity::class.java)
-                loginIntent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
-                startActivity(loginIntent)
-                finish()
+//                val loginIntent = Intent(this, LoginActivity::class.java)
+//                loginIntent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
+//                startActivity(loginIntent)
+//                finish()
             } catch (e : InterruptedException) {
             } finally {
-                this.finish()
+//                this.finish()
             }
         }
         thread.start()
-
-//        val hd : Handler = Handler()
-//        // in Java -> Handler hd = new Handler();
-//
-//
-//        hd.postDelayed({
-//            //Intent loginIntent = new Intent(SplashActivity.this, LoginActivity.class);
-//            val loginIntent = Intent(this, LoginActivity::class.java)
-//            startActivity(loginIntent)
-//            finish()
-//        }, 3000)
-
     }
 }
