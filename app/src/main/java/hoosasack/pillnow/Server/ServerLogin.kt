@@ -7,7 +7,7 @@ public class ServerLogin {
     var id : String
     var password : String
 
-    constructor(id: String, password: String) {
+    constructor( id: String, password: String) {
         this.id = id
         this.password = password
     }

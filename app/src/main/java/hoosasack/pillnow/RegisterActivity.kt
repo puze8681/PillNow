@@ -1,33 +1,26 @@
 package hoosasack.pillnow
 
-import android.animation.PropertyValuesHolder
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.ActionBar
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Spinner
+import hoosasack.pillnow.Util.Font.FontActivity
 import kotlinx.android.synthetic.main.activity_register.*
 
-class RegisterActivity : AppCompatActivity() {
+class RegisterActivity : FontActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         super.getActionBar().setCustomView(R.id.custom_actionbar_base)
         setContentView(R.layout.activity_register)
 
-        var agePosition : Int
+        val actionBar = supportActionBar
+        actionBar!!.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+        actionBar.setCustomView(R.layout.custom_actionbar_base)
 
-        var str = (resources.getStringArray(R.array.age))
-        spinner.adapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,str)
+        var customActionBarView : View
+        customActionBarView = actionBar.customView
 
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-            }
-
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                agePosition = position
-            }
-        }
     }
 }

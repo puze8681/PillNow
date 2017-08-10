@@ -1,26 +1,22 @@
 package hoosasack.pillnow
 
-import android.app.Activity
 import android.content.Intent
-import android.graphics.Color
 import android.graphics.PixelFormat
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.support.annotation.ColorInt
 import android.view.Window
 import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.TextView
-import java.io.IOException
+import hoosasack.pillnow.Util.Font.FontActivity
+import kotlinx.android.synthetic.main.activity_splash.*
 import java.lang.Thread.sleep
 
-class SplashActivity : AppCompatActivity() {
+class SplashActivity : FontActivity() {
 
     lateinit var anim : Animation
+    lateinit var intentRegister : Intent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +28,12 @@ class SplashActivity : AppCompatActivity() {
 
         startAnimations()
 
+        intentRegister = Intent(this, RegisterActivity::class.java)
+
+        btn_register.setOnClickListener{
+            view->startActivity(intentRegister)
+        }
+
     }
 
     override fun onAttachedToWindow(): Unit{
@@ -42,7 +44,6 @@ class SplashActivity : AppCompatActivity() {
 
     fun startAnimations(): Unit{
 
-        val linlayout : LinearLayout = findViewById(R.id.activity_splash) as LinearLayout
         val animlayout : LinearLayout = findViewById(R.id.login_layout) as LinearLayout
         val icon : ImageView = findViewById(R.id.icon) as ImageView
 
