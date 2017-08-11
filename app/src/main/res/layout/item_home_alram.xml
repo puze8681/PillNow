@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:padding="8dp"
+    tools:ignore="MissingPrefix"
+    android:layout_height="60dp">
+    <LinearLayout
+        android:id="@+id/layout_item_alram"
+        android:weightSum="16"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:background="@color/hintGray"
+            android:layout_weight="2"
+            android:id="@+id/image"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="11"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+            <TextView
+                app:Font="bold"
+                android:textColor="@color/orange"
+                android:textSize="15sp"
+                android:layout_marginLeft="16dp"
+                android:text="아세트아미노정 500mg"
+                android:id="@+id/name"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+            <TextView
+                app:Font="normal"
+                android:textColor="hintGray"
+                android:textSize="12sp"
+                android:layout_marginLeft="16dp"
+                android:text="일 3회 / 식후 30분"
+                android:id="@+id/content"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                 />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+            <Switch
+                android:switchMinWidth="60dp"
+                android:track="@drawable/switch_track"
+                android:thumb="@drawable/switch_thumb"
+                android:checked="true"
+                android:clickable="true"
+                android:id="@+id/btn_switch"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,5 +1,6 @@
 package hoosasack.pillnow
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.ActionBar
 import android.view.View
@@ -12,15 +13,16 @@ class RegisterActivity : FontActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        super.getActionBar().setCustomView(R.id.custom_actionbar_base)
         setContentView(R.layout.activity_register)
 
-        val actionBar = supportActionBar
-        actionBar!!.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
-        actionBar.setCustomView(R.layout.custom_actionbar_base)
+        val afterIntent = Intent(this, MainActivity::class.java)
+        val beforeIntent = Intent(this, SplashActivity::class.java)
 
-        var customActionBarView : View
-        customActionBarView = actionBar.customView
-
+        btn_after.setOnClickListener(){
+            view->startActivity(afterIntent)
+        }
+        btn_before.setOnClickListener(){
+            view->startActivity(beforeIntent)
+        }
     }
 }

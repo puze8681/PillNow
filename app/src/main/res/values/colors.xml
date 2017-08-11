@@ -8,8 +8,11 @@
     <color name="underBarOrange">#F55836</color>
     <color name="gradationStart">#ff9f58</color>
     <color name="gradationEnd">#f54735</color>
-    <color name="orange">#fa6f45</color>
+    <color name="orange">#ff7247</color>
+    <color name="orangeTwo">#ff7247</color>
+    <color name="orangeDeep">#A13D26</color>
     <color name="hintGray">#cccccc</color>
+    <color name="shadowGray">#dedede</color>
     <color name="downBlack">#222222</color>
-
+    <color name="textBlack">#181818</color>
 </resources>

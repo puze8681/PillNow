@@ -18,7 +18,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity"></activity>
+        <activity
+            android:name=".RegisterActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".Fragment.HomeFragment" />
+        <activity android:name=".Fragment.MapFragment" />
+        <activity android:name=".Fragment.HomeDetailFragment" />
+        <activity android:name=".Fragment.HomeAddAlramFragment"></activity>
     </application>
 
 </manifest>

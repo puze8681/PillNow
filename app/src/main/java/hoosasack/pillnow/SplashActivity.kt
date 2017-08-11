@@ -32,6 +32,7 @@ class SplashActivity : FontActivity() {
 
         btn_register.setOnClickListener{
             view->startActivity(intentRegister)
+            finish()
         }
 
     }
