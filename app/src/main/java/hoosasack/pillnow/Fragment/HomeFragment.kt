@@ -26,9 +26,9 @@ class HomeFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater!!.inflate(R.layout.fragment_home, container, false)
 
-        adapter = HomeAlramAdapter(context, items)
-        recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        recyclerView.adapter = adapter
+        adapter = HomeAlramAdapter(context.applicationContext, items)
+        recyclerView?.layoutManager = LinearLayoutManager(context.applicationContext, LinearLayoutManager.VERTICAL, false)
+        recyclerView?.adapter = adapter
 
         adapter.itemClick = object : HomeAlramAdapter.ItemClick {
             override fun onItemClick(view: View?, position: Int) {
@@ -43,7 +43,7 @@ class HomeFragment : Fragment() {
 
         }
 
-        add_alram.setOnClickListener{
+        add_alram?.setOnClickListener{
             val intent: Intent = Intent(context, HomeAddAlramFragment::class.java)
             startActivityForResult(intent, MY_ADD_CODE)
         }
