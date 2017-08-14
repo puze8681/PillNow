@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:ignore="MissingPrefix"
+    android:layout_width="match_parent"
+    android:layout_height="60dp">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/title"
+            android:textColor="@color/orange"
+            android:textSize="15sp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            android:gravity="center|left"
+            android:text="송원준"
+            app:font="bold"
+             />
+        <TextView
+            android:id="@+id/age"
+            android:textColor="@color/textBlack"
+            android:textSize="13sp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            android:gravity="center|left"
+            android:text="1999년 8월 22일 (만 17세)"
+            app:font="normal"
+            />
+    </LinearLayout>
+</LinearLayout>
