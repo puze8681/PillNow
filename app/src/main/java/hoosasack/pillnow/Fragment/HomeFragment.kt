@@ -42,11 +42,6 @@ class HomeFragment : Fragment() {
             }
 
         }
-
-        btn_add_alram?.setOnClickListener{
-            val intent: Intent = Intent(context, HomeAddAlramFragment::class.java)
-            startActivityForResult(intent, MY_ADD_CODE)
-        }
         return view
     }
 

@@ -13,19 +13,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <ImageView
+    <EditText
+        android:hint="PID 또는 약품이름을 검색해 보세요."
+        style="@style/EditTextSearchStyle"
+        android:layout_toLeftOf="@+id/btn_search"
+        android:layout_toRightOf="@+id/btn_back"
+        android:textSize="12sp"
+        android:background="@color/white"
+        android:textColor="@color/textBlack"
         android:src="@drawable/logo_splash"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
         android:id="@+id/add_alram" />
 
     <ImageView
-        android:id="@+id/btn_share"
+        android:id="@+id/btn_search"
         android:layout_marginRight="-16dp"
         android:layout_alignParentRight="true"
-        android:src="@drawable/ic_fin"
+        android:src="@drawable/ic_map_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
