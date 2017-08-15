@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:padding="16dp"
     android:background="@color/white"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_height="?attr/actionBarSize">
 
     <ImageView
         android:id="@+id/btn_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_marginLeft="-16dp"
-        android:src="@drawable/ic_home_back" />
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/ic_home_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <ImageView
-        android:id="@+id/add_alram"
+        android:src="@drawable/logo_splash"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:src="@drawable/logo_splash" />
+        android:layout_alignParentStart="true"
+        android:id="@+id/add_alram" />
 
     <ImageView
         android:id="@+id/btn_share"
         android:layout_marginRight="-16dp"
         android:layout_alignParentRight="true"
-        android:src="@drawable/ic_setting_logout"
+        android:src="@drawable/ic_fin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
 </RelativeLayout>
