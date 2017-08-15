@@ -40,10 +40,10 @@ class InformFragment : Fragment() {
         adapterProhibited = InformProhibitedAllergyAdapter(context.applicationContext, itemsProhibited)
         adapterAllergy = InformProhibitedAllergyAdapter(context.applicationContext, itemsAllergy)
 
-        chronic_pill_list.adapter = adapterChronic
-        current_pill_list.adapter = adapterCurrent
-        prohibited_list.adapter = adapterProhibited
-        allergy_list.adapter = adapterAllergy
+        chronic_pill_list?.adapter = adapterChronic
+        current_pill_list?.adapter = adapterCurrent
+        prohibited_list?.adapter = adapterProhibited
+        allergy_list?.adapter = adapterAllergy
 
         return view
     }

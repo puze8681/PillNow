@@ -17,9 +17,13 @@
         android:background="@drawable/background_text">
 
         <TextView
+            android:layout_marginLeft="16dp"
+            android:textSize="15sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center|left"
             android:textColor="@color/textBlack"
             app:font="normal"
-            style="@style/ItemInformTitleStyle"
             android:text="사용자 정보"
              />
     </LinearLayout>
@@ -39,9 +43,13 @@
                 android:layout_height="50dp"
                 android:background="@drawable/background_text">
                 <TextView
+                    android:layout_marginLeft="16dp"
+                    android:textSize="15sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center|left"
                     android:textColor="@color/textBlack"
                     app:font="normal"
-                    style="@style/ItemInformTitleStyle"
                     android:text="만성 복용약" />
             </LinearLayout>
 
@@ -56,10 +64,15 @@
                 android:background="@drawable/background_text">
 
                 <TextView
+                    android:layout_marginLeft="16dp"
+                    android:textSize="15sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center|left"
                     android:textColor="@color/textBlack"
                     app:font="normal"
-                    style="@style/ItemInformTitleStyle"
-                    android:text="현재 복용약" />
+                    android:text="현재 복용약"
+                    android:id="@+id/textView3" />
             </LinearLayout>
 
             <ListView
@@ -73,9 +86,13 @@
                 android:background="@drawable/background_text">
 
                 <TextView
+                    android:layout_marginLeft="16dp"
+                    android:textSize="15sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center|left"
                     android:textColor="@color/textBlack"
                     app:font="normal"
-                    style="@style/ItemInformTitleStyle"
                     android:text="알러지 성분"
                     android:id="@+id/textView" />
             </LinearLayout>
@@ -90,9 +107,13 @@
                 android:background="@drawable/background_text">
 
                 <TextView
+                    android:layout_marginLeft="16dp"
+                    android:textSize="15sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center|left"
                     android:textColor="@color/textBlack"
                     app:font="normal"
-                    style="@style/ItemInformTitleStyle"
                     android:text="복용 금지약"
                     android:id="@+id/textView2" />
             </LinearLayout>
