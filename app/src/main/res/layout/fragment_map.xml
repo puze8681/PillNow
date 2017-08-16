@@ -58,6 +58,8 @@
         </LinearLayout>
 
         <android.support.design.widget.FloatingActionButton
+            android:src="@drawable/ic_map_floating"
+            android:background="@color/orange"
             android:id="@+id/pill_list"
             android:layout_marginRight="24dp"
             android:layout_marginBottom="24dp"

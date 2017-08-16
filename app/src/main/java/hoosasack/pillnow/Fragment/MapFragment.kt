@@ -12,15 +12,11 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import hoosasack.pillnow.R
+import kotlinx.android.synthetic.main.fragment_map.*
 
 class MapFragment : Fragment(), OnMapReadyCallback {
-    override fun onMapReady(googleMap: GoogleMap) {
-        var mMap = googleMap
 
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))    }
+    lateinit var current : LatLng
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,11 +25,25 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater!!.inflate(R.layout.fragment_map, container, false)
-
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        current = LatLng(,)
+
+        btn_current_location.setOnClickListener{
+
+        }
+
         return view
     }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        var mMap = googleMap
+
+        // Add a marker in Sydney and move the camera
+        val sydney = LatLng(-34.0, 151.0)
+        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))    }
 
     companion object {
         fun newInstance(): MapFragment {

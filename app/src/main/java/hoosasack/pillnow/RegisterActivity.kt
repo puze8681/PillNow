@@ -18,11 +18,11 @@ class RegisterActivity : FontActivity() {
         val afterIntent = Intent(this, MainActivity::class.java)
         val beforeIntent = Intent(this, SplashActivity::class.java)
 
-        btn_after.setOnClickListener(){
-            view->startActivity(afterIntent)
+        btn_after.setOnClickListener{
+            startActivity(afterIntent)
         }
-        btn_before.setOnClickListener(){
-            view->startActivity(beforeIntent)
+        btn_before.setOnClickListener{
+            startActivity(beforeIntent)
         }
     }
 }
