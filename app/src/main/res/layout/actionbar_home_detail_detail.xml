@@ -10,7 +10,7 @@
     android:layout_height="?attr/actionBarSize">
 
     <ImageView
-        android:id="@+id/btn_back"
+        android:id="@+id/btn_back_detail_detail"
         android:layout_marginLeft="-16dp"
         android:layout_alignParentLeft="true"
         android:src="@drawable/ic_home_back"
@@ -29,6 +29,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
-        android:id="@+id/add_alram" />
+        android:id="@+id/logo_splash" />
 
 </RelativeLayout>

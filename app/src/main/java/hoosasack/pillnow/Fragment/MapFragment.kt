@@ -7,13 +7,11 @@ import android.graphics.Canvas
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
+import android.support.v7.widget.LinearLayoutManager
 import android.text.Layout
 import android.util.DisplayMetrics
 import android.view.*
-import android.widget.EditText
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -21,15 +19,26 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import hoosasack.pillnow.Adapter.HomeAlramAdapter
+import hoosasack.pillnow.Adapter.HomeDetailAlramAdapter
+import hoosasack.pillnow.Adapter.MapListAdapter
+import hoosasack.pillnow.Data.HomeAlramData
+import hoosasack.pillnow.Data.MapListData
 import hoosasack.pillnow.R
-import kotlinx.android.synthetic.main.fragment_map.*
-import kotlinx.android.synthetic.main.fragment_map.view.*
-import kotlinx.android.synthetic.main.item_home_alram.view.*
+import kotlinx.android.synthetic.main.actionbar_map.*
+import kotlinx.android.synthetic.main.actionbar_map_inform.*
+import kotlinx.android.synthetic.main.actionbar_map_list.*
+import kotlinx.android.synthetic.main.layout_home_detail.*
+import kotlinx.android.synthetic.main.layout_map.*
+import kotlinx.android.synthetic.main.layout_map_inform.*
+import kotlinx.android.synthetic.main.layout_map_list.*
 import kotlin.properties.Delegates
 
 class MapFragment : Fragment(), OnMapReadyCallback {
 
     private var map by Delegates.notNull<GoogleMap>()
+    var items: ArrayList<MapListData> = ArrayList()
+    lateinit var adapter: MapListAdapter
 
     lateinit var current : LatLng
 
@@ -43,17 +52,40 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
+        adapting()
+
         btn_current_location.setOnClickListener{
-
+            Toast.makeText(context, "LOCATION", 0)
         }
-
-        view.btn_zoom_in.setOnClickListener{
+        btn_zoom_in.setOnClickListener{
             map.animateCamera(CameraUpdateFactory.zoomIn())
         }
 
-        view.btn_zoom_out.setOnClickListener{
+        btn_zoom_out.setOnClickListener{
             map.animateCamera(CameraUpdateFactory.zoomOut())
         }
+        btn_pill_list.setOnClickListener{
+            layout_fragment_map.visibility = View.GONE
+            layout_fragment_map_list.visibility = View.VISIBLE
+            layout_fragment_map_inform.visibility = View.GONE
+        }
+        btn_back_inform.setOnClickListener{
+            layout_fragment_map.visibility = View.VISIBLE
+            layout_fragment_map_list.visibility = View.GONE
+            layout_fragment_map_inform.visibility = View.GONE
+        }
+        btn_search.setOnClickListener{
+            layout_fragment_map.visibility = View.GONE
+            layout_fragment_map_list.visibility = View.GONE
+            layout_fragment_map_inform.visibility = View.VISIBLE
+        }
+        btn_back_list.setOnClickListener{
+            layout_fragment_map.visibility = View.VISIBLE
+            layout_fragment_map_list.visibility = View.GONE
+            layout_fragment_map_inform.visibility = View.GONE
+        }
+
+
 
         return view
     }
@@ -132,7 +164,11 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         return bitmap
     }
 
-
+    private fun adapting(){
+        adapter = MapListAdapter(context.applicationContext, items)
+        recyclerView?.layoutManager = LinearLayoutManager(context.applicationContext, LinearLayoutManager.VERTICAL, false)
+        recyclerView?.adapter = adapter
+    }
 
     companion object {
         fun newInstance(): MapFragment {

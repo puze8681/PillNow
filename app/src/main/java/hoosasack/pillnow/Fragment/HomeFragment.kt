@@ -17,11 +17,11 @@ import hoosasack.pillnow.Data.HomeDetailAlramData
 import hoosasack.pillnow.Data.HomeDetailDetailContentData
 import hoosasack.pillnow.Data.InformProhibitedAllergyData
 import hoosasack.pillnow.R
-import kotlinx.android.synthetic.main.actionbar_home.*
 import kotlinx.android.synthetic.main.actionbar_home_detail.*
-import kotlinx.android.synthetic.main.actionbar_scan.*
-import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_inform.*
+import kotlinx.android.synthetic.main.actionbar_home_detail_detail.*
+import kotlinx.android.synthetic.main.layout_home.*
+import kotlinx.android.synthetic.main.layout_home_detail.*
+import kotlinx.android.synthetic.main.layout_home_detail_detail.*
 
 class HomeFragment : Fragment() {
 
@@ -66,13 +66,19 @@ class HomeFragment : Fragment() {
         }
 
         main_content_detail.setOnClickListener{
-            layout_fragment_home_detail.visibility = View.GONE
             layout_fragment_home.visibility = View.GONE
+            layout_fragment_home_detail.visibility = View.GONE
             layout_fragment_home_detail_detail.visibility = View.VISIBLE
 
             title_detail_detail.text = title_detail.text
             title_detail_detail_sub.text = title_detail.text
             content_detail_detail.text = content_detail.text
+        }
+
+        btn_back_detail_detail.setOnClickListener{
+            layout_fragment_home.visibility = View.GONE
+            layout_fragment_home_detail.visibility = View.VISIBLE
+            layout_fragment_home_detail_detail.visibility = View.GONE
         }
 
         btn_add_alram_detail.setOnClickListener{
@@ -90,8 +96,8 @@ class HomeFragment : Fragment() {
         recyclerView?.adapter = adapter
 
         adapterHomeDAlram = HomeDetailAlramAdapter(context.applicationContext, itemsHomeDAlram)
-        recyclerView?.layoutManager = LinearLayoutManager(context.applicationContext, LinearLayoutManager.VERTICAL, false)
-        recyclerView?.adapter = adapterHomeDAlram
+        recyclerView_detail_alram?.layoutManager = LinearLayoutManager(context.applicationContext, LinearLayoutManager.VERTICAL, false)
+        recyclerView_detail_alram?.adapter = adapterHomeDAlram
 
         adapterHomeDdWarnOne = HomeDetailDetailContentAdapter(context.applicationContext, itemsHomeDdWarnOne)
         list_warn_one_detail_detail?.adapter = adapterHomeDdWarnOne

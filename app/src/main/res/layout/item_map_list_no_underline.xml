@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:ignore="MissingPrefix"
+    android:layout_width="match_parent"
+    android:layout_height="70">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_marginBottom="10dp"
+            android:id="@+id/title"
+            android:textColor="@color/orange"
+            android:textSize="15sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:gravity="center|left"
+            android:text="YG 약국"
+            app:font="bold"
+             />
+        <TextView
+            android:id="@+id/location"
+            android:textColor="@color/textBlack"
+            android:textSize="13sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:gravity="center|left"
+            android:text="서울시 종로구 구기동 121"
+            app:font="normal"
+            />
+        <TextView
+            android:id="@+id/call"
+            android:textColor="@color/textBlack"
+            android:textSize="13sp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            android:gravity="center|left"
+            android:text="010-9790-8310"
+            app:font="normal"
+            />
+    </LinearLayout>
+</RelativeLayout>
