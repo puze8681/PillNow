@@ -39,7 +39,7 @@
             <TextView
                 android:gravity="center|left"
                 app:font="normal"
-                android:textColor="@color/hintGray"
+                android:textColor="@color/textBlack"
                 android:textSize="13sp"
                 android:layout_marginLeft="16dp"
                 android:text="일 3회 / 식후 30분"

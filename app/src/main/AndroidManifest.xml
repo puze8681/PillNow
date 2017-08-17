@@ -10,8 +10,6 @@
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
 
     <application
         android:name=".Util.Font.TypeKit"
@@ -33,7 +31,6 @@
             android:name=".RegisterActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".Fragment.HomeDetailFragment" />
         <activity android:name=".Fragment.HomeFragment" />
         <activity android:name=".Fragment.InformFragment" />
         <activity android:name=".Fragment.MapFragment" />

@@ -8,16 +8,32 @@ import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.TextView
+import hoosasack.pillnow.Adapter.*
 import hoosasack.pillnow.Data.HomeAlramData
-import hoosasack.pillnow.Adapter.HomeAlramAdapter
+import hoosasack.pillnow.Data.HomeDetailAlramData
+import hoosasack.pillnow.Data.HomeDetailDetailContentData
+import hoosasack.pillnow.Data.InformProhibitedAllergyData
 import hoosasack.pillnow.R
 import kotlinx.android.synthetic.main.actionbar_home.*
+import kotlinx.android.synthetic.main.actionbar_home_detail.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_inform.*
 
 class HomeFragment : Fragment() {
 
     var items: ArrayList<HomeAlramData> = ArrayList()
     lateinit var adapter: HomeAlramAdapter
+
+    var itemsHomeDAlram: ArrayList<HomeDetailAlramData> = ArrayList()
+    lateinit var adapterHomeDAlram: HomeDetailAlramAdapter
+
+    var itemsHomeDdWarnOne: ArrayList<HomeDetailDetailContentData> = ArrayList()
+    lateinit var adapterHomeDdWarnOne: HomeDetailDetailContentAdapter
+
+    var itemsHomeDdWarnTwo: ArrayList<HomeDetailDetailContentData> = ArrayList()
+    lateinit var adapterHomeDdWarnTwo: HomeDetailDetailContentAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,59 +42,59 @@ class HomeFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater!!.inflate(R.layout.fragment_home, container, false)
 
-        adapter = HomeAlramAdapter(context.applicationContext, items)
-        recyclerView?.layoutManager = LinearLayoutManager(context.applicationContext, LinearLayoutManager.VERTICAL, false)
-        recyclerView?.adapter = adapter
+        adapting()
 
         adapter.itemClick = object : HomeAlramAdapter.ItemClick {
             override fun onItemClick(view: View?, position: Int) {
-                val intent: Intent = Intent(context, HomeDetailFragment::class.java)
-                intent.putExtra("position", position)
-                intent.putExtra("image", items.get(position).image)
-                intent.putExtra("name", items.get(position).name)
-                intent.putExtra("content", items.get(position).content)
-                intent.putExtra("switch", items.get(position).switch)
-                startActivityForResult(intent, MY_SET_CODE)
+
+                layout_fragment_home.visibility = View.GONE
+                layout_fragment_home_detail.visibility = View.VISIBLE
+                layout_fragment_home_detail_detail.visibility = View.GONE
+
+                title_detail.text = items.get(position).name
+                content_detail.text = items.get(position).content
             }
 
+        }
+
+        btn_back_detail.setOnClickListener{
+            layout_fragment_home.visibility = View.VISIBLE
+            layout_fragment_home_detail.visibility = View.GONE
+            layout_fragment_home_detail_detail.visibility = View.GONE
+        }
+
+        main_content_detail.setOnClickListener{
+            layout_fragment_home_detail.visibility = View.GONE
+            layout_fragment_home.visibility = View.GONE
+            layout_fragment_home_detail_detail.visibility = View.VISIBLE
+
+            title_detail_detail.text = title_detail.text
+            title_detail_detail_sub.text = title_detail.text
+            content_detail_detail.text = content_detail.text
         }
         return view
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (data == null)
-            return
-        when (requestCode) {
-            MY_ADD_CODE -> {
-                val image: Int = data.getIntExtra("image",R.drawable.ic_splash_logo)
-                val name: String = data.getStringExtra("content")
-                val content: String = data.getStringExtra("content")
-                val switch: Boolean = data.getBooleanExtra("switch",false)
-                items.add(0, HomeAlramData(image, name, content, switch))
-                adapter.notifyItemInserted(0)
-            }
-            MY_SET_CODE -> {
-                val position: Int = data.getIntExtra("position", -1)
-                val image: Int = data.getIntExtra("image",R.drawable.ic_splash_logo)
-                val name: String = data.getStringExtra("content")
-                val content: String = data.getStringExtra("content")
-                val switch: Boolean = data.getBooleanExtra("switch",false)
-                if (position == -1)
-                    return
-                items.set(position, HomeAlramData(image, name, content, switch))
-                adapter.notifyItemChanged(position)
-            }
-        }
+    private fun adapting(){
 
-        super.onActivityResult(requestCode, resultCode, data)
+        adapter = HomeAlramAdapter(context.applicationContext, items)
+        recyclerView?.layoutManager = LinearLayoutManager(context.applicationContext, LinearLayoutManager.VERTICAL, false)
+        recyclerView?.adapter = adapter
+
+        adapterHomeDAlram = HomeDetailAlramAdapter(context.applicationContext, itemsHomeDAlram)
+        recyclerView?.layoutManager = LinearLayoutManager(context.applicationContext, LinearLayoutManager.VERTICAL, false)
+        recyclerView?.adapter = adapterHomeDAlram
+
+        adapterHomeDdWarnOne = HomeDetailDetailContentAdapter(context.applicationContext, itemsHomeDdWarnOne)
+        list_warn_one_detail_detail?.adapter = adapterHomeDdWarnOne
+
+        adapterHomeDdWarnTwo = HomeDetailDetailContentAdapter(context.applicationContext, itemsHomeDdWarnTwo)
+        list_warn_two_detail_detail?.adapter = adapterHomeDdWarnTwo
+
+
     }
 
-
     companion object {
-
-        val MY_ADD_CODE: Int = 1000
-        val MY_SET_CODE: Int = 2000
-
         fun newInstance(): HomeFragment {
             val fragment: HomeFragment = HomeFragment()
             return fragment
