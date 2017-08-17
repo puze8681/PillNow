@@ -16,6 +16,7 @@
         <item name="android:textCursorDrawable">@color/black</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textColorHighlight">@color/white</item>
+        <item name="android:textColorHint">@color/hintGray</item>
     </style>
 
     <style name="EditTextSearchStyle" parent="Widget.AppCompat.EditText">
@@ -23,6 +24,15 @@
         <item name="android:textCursorDrawable">@color/black</item>
         <item name="android:textColor">@color/textBlack</item>
         <item name="android:textColorHighlight">@color/white</item>
+        <item name="android:textColorHint">@color/hintGray</item>
+    </style>
+
+    <style name="EditTextAlramStyle" parent="Widget.AppCompat.EditText">
+        <item name="colorControlNormal">@color/orange</item>
+        <item name="android:textCursorDrawable">@color/black</item>
+        <item name="android:textColor">@color/textBlack</item>
+        <item name="android:textColorHighlight">@color/white</item>
+        <item name="android:textColorHint">#cccccc</item>
     </style>
 
 </resources>

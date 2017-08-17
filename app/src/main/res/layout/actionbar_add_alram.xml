@@ -21,7 +21,7 @@
         android:layout_toRightOf="@+id/btn_back"
         android:textSize="18sp"
         app:font="bold"
-        android:text="자세히 보기"
+        android:text="취소"
         android:gravity="center|left"
         android:background="@color/white"
         android:textColor="@color/orange"

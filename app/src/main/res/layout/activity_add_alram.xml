@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_add_alram"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:ignore="MissingPrefix"
+    tools:context="hoosasack.pillnow.AddAlramActivity">
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/layout_fragment_home_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/actionbar_add_alram"/>
+
+        <LinearLayout
+            android:layout_weight="2"
+            android:background="@drawable/background_text"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <TextView
+                android:textColor="@color/textBlack"
+                android:textSize="15sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
+                android:gravity="center|left"
+                android:text="알람 추가"
+                app:font="normal"
+                android:id="@+id/textView4" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:padding="16dp"
+            android:id="@+id/main_content_detail"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="11"
+            android:weightSum="5">
+
+            <TextView
+                android:layout_marginBottom="16dp"
+                app:font="normal"
+                android:textSize="12sp"
+                android:textColor="@color/textBlack"
+                android:text="알람 제목"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/title"
+                style="@style/EditTextAlramStyle"
+                android:textSize="30sp"
+                android:textColorHint="#cccccc"
+                android:textColor="@color/black"
+                android:hint="예) 아침, 수면 전"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="2"
+            android:background="@drawable/background_text"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <TextView
+                android:textColor="@color/textBlack"
+                android:textSize="15sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
+                android:gravity="center|left"
+                android:text="시간 설정"
+                app:font="normal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="15"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/btn_edit_alram_time"
+                android:padding="16dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    app:font="bold"
+                    android:textColor="@color/orange"
+                    android:text="AM 09 00"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <android.support.v4.widget.Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
+                <TextView
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textSize="12sp"
+                    app:font="normal"
+                    android:textColor="#cccccc"
+                    android:text="수정하시려면 터치해주세요"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent">
+                <View
+                    android:background="@drawable/background_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></View>
+
+                <LinearLayout
+                    android:layout_gravity="bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:background="@color/orangeDeep"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btn_add"
+                        app:font="normal"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/btn_after"
+                        android:gravity="center"
+                        android:text="추가"
+                        android:textColor="@color/orangeDeep"
+                        android:textSize="13sp" />
+                </LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

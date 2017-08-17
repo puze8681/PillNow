@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import hoosasack.pillnow.Adapter.*
+import hoosasack.pillnow.AddAlramActivity
 import hoosasack.pillnow.Data.HomeAlramData
 import hoosasack.pillnow.Data.HomeDetailAlramData
 import hoosasack.pillnow.Data.HomeDetailDetailContentData
@@ -18,6 +19,7 @@ import hoosasack.pillnow.Data.InformProhibitedAllergyData
 import hoosasack.pillnow.R
 import kotlinx.android.synthetic.main.actionbar_home.*
 import kotlinx.android.synthetic.main.actionbar_home_detail.*
+import kotlinx.android.synthetic.main.actionbar_scan.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_inform.*
 
@@ -72,6 +74,12 @@ class HomeFragment : Fragment() {
             title_detail_detail_sub.text = title_detail.text
             content_detail_detail.text = content_detail.text
         }
+
+        btn_add_alram_detail.setOnClickListener{
+            val intent = Intent(context, AddAlramActivity::class.java)
+            startActivity(intent)
+        }
+
         return view
     }
 
