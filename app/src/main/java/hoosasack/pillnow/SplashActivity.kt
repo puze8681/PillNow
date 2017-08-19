@@ -22,16 +22,25 @@ import android.os.Build
 import android.content.pm.PackageManager
 import android.support.v4.content.ContextCompat
 import android.Manifest.permission.CALL_PHONE
+import android.app.ProgressDialog
 import android.content.Context
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import app.akexorcist.bluetotohspp.library.BluetoothSPP
 import hoosasack.pillnow.Util.BlueTooth.BluetoothService
+import hoosasack.pillnow.Util.Server.Data.Login
+import hoosasack.pillnow.Util.Server.NetWork.RetrofitService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 
 class SplashActivity : FontActivity() {
 
+    lateinit var retrofitService : RetrofitService
     lateinit var anim : Animation
     lateinit var intentRegister : Intent
 
@@ -78,6 +87,7 @@ class SplashActivity : FontActivity() {
     }
 
     fun initApp() : Unit{
+        retrofitSetting()
         startService()
         startAnimations()
         intentRegister = Intent(this, RegisterActivity::class.java)
@@ -85,6 +95,50 @@ class SplashActivity : FontActivity() {
             view->startActivity(intentRegister)
             finish()
         }
+        btn_login.setOnClickListener{
+
+            var progressDialog : ProgressDialog = ProgressDialog(applicationContext)
+            progressDialog.setMessage("로그인 하는 중입니다")
+            progressDialog.show()
+
+            var call : Call<Login> = retrofitService.login(id.toString().trim(), password.toString().trim())
+            call.enqueue(object : Callback<Login>{
+
+                override fun onResponse(call: Call<Login>, response: Response<Login>) {
+                    if (response.code() === 200) {
+                        val user = response.body()
+                        var id = user?.id
+                        var password = user?.password
+                        if (user != null) {
+                            val loginIntent = Intent(this@SplashActivity, MainActivity::class.java)
+                            startActivity(loginIntent)
+                            finish()
+                            Toast.makeText(applicationContext, "로그인 성공 . . .", Toast.LENGTH_SHORT).show()
+                        }
+                    } else if (response.code() === 400) {
+                        progressDialog.dismiss()
+                        Toast.makeText(applicationContext, "아이디 혹은 비밀번호가 옳지 않습니다 ... ", Toast.LENGTH_SHORT).show()
+                    } else {
+                        progressDialog.dismiss()
+                        Toast.makeText(applicationContext, "UNKNOWN ERR ... ", Toast.LENGTH_SHORT).show()
+                    }                }
+
+                override fun onFailure(call: Call<Login>?, t: Throwable?) {
+                    progressDialog.dismiss();
+                    Toast.makeText(applicationContext, "요청 불가 ... ", Toast.LENGTH_SHORT).show();
+                }
+
+            })
+        }
+    }
+
+    fun retrofitSetting(){
+        var url : String = "soylatte.kr:3000"
+        var retrofit : Retrofit = Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+        retrofitService = retrofit.create(RetrofitService::class.java)
     }
 
     fun startService(){
