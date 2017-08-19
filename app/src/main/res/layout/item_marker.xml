@@ -9,6 +9,7 @@
     tools:ignore="MissingPrefix">
 
     <LinearLayout
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@mipmap/pic_finddrugstore_9patch"
@@ -20,7 +21,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/ic_marker_phone"
             android:gravity="center"
             android:text="YG 약국"
             android:textColor="@color/orange"

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_alram_background"
+    android:orientation="vertical"
+    android:weightSum="10"
+    android:id="@+id/activity_alram"
+    tools:ignore="MissingPrefix">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:orientation="vertical"
+        android:weightSum="3">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2">
+
+            <TextView
+                android:id="@+id/text_pill_now"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/text_alram_current_time"
+                android:layout_centerHorizontal="true"
+                android:text="Pill Now"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                app:font="custom" />
+
+            <TextView
+                android:id="@+id/text_alram_current_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true"
+                android:text="12 : 30"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="75sp"
+                app:font="custom" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center|bottom"
+                android:text="약 먹을 시간이에요!"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                app:font="normal" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center|top"
+                android:text="잊지 말아주세요."
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                app:font="normal" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3">
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_gravity="center"
+            android:id="@+id/recyclerview_alram"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3">
+
+        <Button
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            app:font="normal"
+            android:text="5분 후 다시 알림"
+            android:background="@drawable/btn_later"
+            android:id="@+id/btn_later"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp"/>
+        <Button
+            android:textColor="@color/orange"
+            android:textSize="13sp"
+            app:font="normal"
+            android:text="확인"
+            android:background="@drawable/btn_check"
+            android:id="btn_check"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+    </LinearLayout>
+</LinearLayout>

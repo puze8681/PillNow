@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1094284069083",
+    "firebase_url": "https://pillnow-ccad6.firebaseio.com",
+    "project_id": "pillnow-ccad6",
+    "storage_bucket": "pillnow-ccad6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1094284069083:android:a02cb953044a8fea",
+        "android_client_info": {
+          "package_name": "hoosasack.pillnow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1094284069083-7a7ubaq9jd1k969tt0qc8kcfhmk73t1m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "hoosasack.pillnow",
+            "certificate_hash": "6f6427e2bbddcfbee7ea8084e7cab0f58c362861"
+          }
+        },
+        {
+          "client_id": "1094284069083-2cnv51i54sjb2vv90dssrdbatte439be.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVZQihpi4Aop_cjodPmun95qalQfPOnMA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1094284069083-2cnv51i54sjb2vv90dssrdbatte439be.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

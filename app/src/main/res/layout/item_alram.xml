@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:orientation="vertical"
+    android:padding="8dp"
+    tools:ignore="MissingPrefix">
+
+    <LinearLayout
+        android:id="@+id/layout_item_alram"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="20">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:background="@color/hintGray" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="17"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="16dp"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:text="아세트아미노정 500mg"
+                android:textColor="@color/orange"
+                android:textSize="15sp"
+                app:font="bold" />
+
+            <TextView
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="16dp"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:text="식후 30분씩 1알씩 복용해주세요"
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                app:font="normal" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
