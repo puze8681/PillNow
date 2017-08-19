@@ -238,7 +238,7 @@
             <ImageView
                 android:id="@+id/ic_location"
                 android:layout_margin="5dp"
-                android:src="@drawable/ic_drugstoredetails_location"
+                android:src="@drawable/ic_map_inform_location"
                 android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent" />
@@ -297,7 +297,7 @@
 
             <ImageView
                 android:id="@+id/ic_call"
-                android:src="@drawable/ic_drugstoredetails_call"
+                android:src="@drawable/ic_map_inform_call"
                 android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"

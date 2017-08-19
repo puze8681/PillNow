@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="12dp"
+    tools:ignore="MissingPrefix">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/pic_finddrugstore_9patch"
+        android:orientation="vertical"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/marker_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_marker_phone"
+            android:gravity="center"
+            android:text="YG 약국"
+            android:textColor="@color/orange"
+            android:textSize="15sp"
+            app:font="bold" />
+
+        <TextView
+            android:id="@+id/marker_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="서울시 종로구 구기동 121"
+            android:textColor="@color/textBlack"
+            android:textSize="13sp"
+            app:font="normal" />
+    </LinearLayout>
+</LinearLayout>

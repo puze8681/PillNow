@@ -18,12 +18,14 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import hoosasack.pillnow.Adapter.HomeAlramAdapter
 import hoosasack.pillnow.Adapter.HomeDetailAlramAdapter
 import hoosasack.pillnow.Adapter.MapListAdapter
 import hoosasack.pillnow.Data.HomeAlramData
 import hoosasack.pillnow.Data.MapListData
+import hoosasack.pillnow.Data.MarkerItemData
 import hoosasack.pillnow.R
 import kotlinx.android.synthetic.main.actionbar_map.*
 import kotlinx.android.synthetic.main.actionbar_map_inform.*
@@ -108,41 +110,16 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun addMarker(title: String, location: String, lat: Double, log: Double, isMarkerRemove: Boolean) {
-        val tparam = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
         val mparam = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
-        val cparam = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
-        val lparam = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
         val view = FrameLayout(context)
-        val textTitle = TextView(context)
-        val textLocation = TextView(context)
-        val informLayout = LayoutInflater.from(context)
-
-        lparam.topMargin = 11
-
-        tparam.topMargin = 12
-        textTitle.text = title
-        textTitle.layoutParams = tparam
-        textTitle.gravity = Gravity.CENTER_HORIZONTAL
-        textTitle.textSize = 15.0f
-        textTitle.setTextColor(ContextCompat.getColor(context, R.color.orange))
-
-        cparam.topMargin = 10
-        textLocation.text= location
-        textLocation.layoutParams = cparam
-        textLocation.gravity = Gravity.CENTER_HORIZONTAL
-        textLocation.textSize = 13.0f
-        textLocation.setTextColor(ContextCompat.getColor(context, R.color.textBlack))
 
         val imageView = ImageView(context)
         imageView.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_map_marker))
         imageView.layoutParams = mparam
 
         view.addView(imageView)
-        view.addView(textTitle)
-        view.addView(textLocation)
 
         map.addMarker(MarkerOptions().position(LatLng(lat, log)).icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(context, view))))
-
     }
 
     val Context.windowManager : WindowManager
@@ -164,10 +141,46 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         return bitmap
     }
 
+    private fun setCustomMarkerView(){
+        var marker_root_view = LayoutInflater.from(context).inflate(R.id.,null)
+    }
+
+    private fun getSampleMarkerItems(){
+        var markerList : ArrayList<MarkerItemData> = ArrayList()
+
+        //List this ... add marker
+        //markerList.add(MarkerItemData(12.0, 13.1, "check", "check"))
+
+        for (i in markerList){
+            addMarker(i)
+        }
+    }
+
     private fun adapting(){
         adapter = MapListAdapter(context.applicationContext, items)
         recyclerView?.layoutManager = LinearLayoutManager(context.applicationContext, LinearLayoutManager.VERTICAL, false)
         recyclerView?.adapter = adapter
+    }
+
+    private class CustomInfoWindowAdapter : GoogleMap.InfoWindowAdapter{
+
+        private lateinit final var infoWindow : View
+
+        init {
+            infoWindow = .inflate(R.layout.item_marker)
+        }
+
+        override fun getInfoWindow(p0: Marker?): View {
+
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
+        override fun getInfoContents(p0: Marker?): View {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
+
+
     }
 
     companion object {
