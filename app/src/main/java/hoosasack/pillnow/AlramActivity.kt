@@ -5,9 +5,10 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import hoosasack.pillnow.Adapter.AlramAdapter
 import hoosasack.pillnow.Data.AlramData
+import hoosasack.pillnow.Util.Font.FontActivity
 import kotlinx.android.synthetic.main.activity_alram.*
 
-class AlramActivity : AppCompatActivity() {
+class AlramActivity : FontActivity() {
 
     var context : Context = applicationContext
     var items: ArrayList<AlramData> = ArrayList()

@@ -22,7 +22,12 @@ import android.os.Build
 import android.content.pm.PackageManager
 import android.support.v4.content.ContextCompat
 import android.Manifest.permission.CALL_PHONE
+import android.content.Context
 import android.util.Log
+import android.view.View
+import android.widget.Toast
+import app.akexorcist.bluetotohspp.library.BluetoothSPP
+import hoosasack.pillnow.Util.BlueTooth.BluetoothService
 
 
 class SplashActivity : FontActivity() {
@@ -39,13 +44,25 @@ class SplashActivity : FontActivity() {
         setContentView(R.layout.activity_splash)
 
         //퍼미션
+        permisionCheck()
+    }
+
+    override fun onAttachedToWindow(): Unit{
+        super.onAttachedToWindow()
+        val window : Window = window
+        window.setFormat(PixelFormat.RGBA_8888)
+    }
+
+    fun permisionCheck(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED ||
                     ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED||
-                    ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED||
+                    ContextCompat.checkSelfPermission(this, android.Manifest.permission.BLUETOOTH) != PackageManager.PERMISSION_GRANTED||
+                    ContextCompat.checkSelfPermission(this, android.Manifest.permission.BLUETOOTH_ADMIN) != PackageManager.PERMISSION_GRANTED) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     Log.d("puze", "PERMISSION")
-                    requestPermissions(arrayOf<String>(android.Manifest.permission.INTERNET, android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.CAMERA), 200)
+                    requestPermissions(arrayOf<String>(android.Manifest.permission.INTERNET, android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.CAMERA, android.Manifest.permission.BLUETOOTH, android.Manifest.permission.BLUETOOTH_ADMIN), 200)
                     Log.d("puze", "initApp0")
                     initApp()
                 }
@@ -61,6 +78,7 @@ class SplashActivity : FontActivity() {
     }
 
     fun initApp() : Unit{
+        startService()
         startAnimations()
         intentRegister = Intent(this, RegisterActivity::class.java)
         btn_register.setOnClickListener{
@@ -68,12 +86,11 @@ class SplashActivity : FontActivity() {
             finish()
         }
     }
-    override fun onAttachedToWindow(): Unit{
-        super.onAttachedToWindow()
-        val window : Window = window
-        window.setFormat(PixelFormat.RGBA_8888)
-    }
 
+    fun startService(){
+        var servie : Intent = Intent(this, BluetoothService::class.java)
+        startService(servie)
+    }
     fun startAnimations(): Unit{
 
         val animlayout : LinearLayout = findViewById(R.id.login_layout) as LinearLayout

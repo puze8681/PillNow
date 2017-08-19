@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -27,7 +26,7 @@
                 android:id="@+id/text_pill_now"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_above="@id/text_alram_current_time"
+                android:layout_above="@+id/text_alram_current_time"
                 android:layout_centerHorizontal="true"
                 android:text="Pill Now"
                 android:textColor="@color/white"
@@ -110,12 +109,12 @@
             android:layout_width="match_parent"
             android:layout_height="20dp"/>
         <Button
+            android:background="@drawable/btn_check"
             android:textColor="@color/orange"
             android:textSize="13sp"
             app:font="normal"
             android:text="확인"
-            android:background="@drawable/btn_check"
-            android:id="btn_check"
+            android:id="@+id/btn_check"
             android:layout_width="match_parent"
             android:layout_height="40dp" />
     </LinearLayout>

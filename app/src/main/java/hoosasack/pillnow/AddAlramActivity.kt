@@ -5,12 +5,13 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import hoosasack.pillnow.Util.Font.FontActivity
 import hoosasack.pillnow.Util.TimePicker.DialogHandler
 import kotlinx.android.synthetic.main.actionbar_add_alram.*
 import kotlinx.android.synthetic.main.activity_add_alram.*
 import kotlinx.android.synthetic.main.layout_home.*
 
-class AddAlramActivity : AppCompatActivity() {
+class AddAlramActivity : FontActivity() {
 
     lateinit var time : String
     override fun onCreate(savedInstanceState: Bundle?) {
