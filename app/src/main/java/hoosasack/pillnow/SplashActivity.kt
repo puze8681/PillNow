@@ -42,6 +42,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class SplashActivity : FontActivity() {
 
     lateinit var retrofitService: RetrofitService
+    lateinit var progressDialog: ProgressDialog
     lateinit var anim: Animation
     lateinit var intentRegister: Intent
 
@@ -99,14 +100,13 @@ class SplashActivity : FontActivity() {
         }
 
         btn_login.setOnClickListener {
-            var progressDialog: ProgressDialog = ProgressDialog(applicationContext)
-            progressDialog.setMessage("로그인 하는 중입니다")
-            progressDialog.show()
+            progressDialogSetting()
 
             var call: Call<Login> = retrofitService.login(id.toString().trim(), password.toString().trim())
             call.enqueue(object : Callback<Login> {
                 override fun onResponse(call: Call<Login>?, response: Response<Login>?) {
                     if (response?.code() === 200) {
+                        progressDialog.dismiss()
                         val user = response?.body()
                         var id = user?.id
                         var password = user?.password
@@ -145,6 +145,12 @@ class SplashActivity : FontActivity() {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
         retrofitService = retrofit.create(RetrofitService::class.java)
+    }
+
+    fun progressDialogSetting(){
+        progressDialog = ProgressDialog(applicationContext)
+        progressDialog.setMessage("로그인 하는 중입니다")
+        progressDialog.show()
     }
 
     fun startService() {
