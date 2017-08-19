@@ -32,7 +32,7 @@ class MyFirebaseInstanceIDService : FirebaseInstanceIdService() {
                 .build()
 
         val request = Request.Builder()
-                .url("url")
+                .url("soylatte.kr:3000/push")
                 .post(body)
                 .build()
 

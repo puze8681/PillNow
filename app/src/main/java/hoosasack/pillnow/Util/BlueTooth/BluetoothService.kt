@@ -44,6 +44,9 @@ class BluetoothService : Service() {
 
         bt.setAutoConnectionListener(object : BluetoothSPP.AutoConnectionListener {
             override fun onNewConnection(name: String, address: String) {
+
+                //처음 연결될 떄 "C", 알람이 울릴 때 "R" 을 보낼거임
+                bt.send("C", false)
             }
             override fun onAutoConnectionStarted() {}
         })
@@ -52,6 +55,8 @@ class BluetoothService : Service() {
             val mainIntent = Intent(applicationContext, MainActivity::class.java)
             mainIntent.putExtra("message", message)
             startActivity(mainIntent)
+
+            //처음 연결될 때 "C", 알약통을 열었을 때 "O" 를 받을거임
         }
 
         return super.onStartCommand(intent, flags, startId)

@@ -12,13 +12,10 @@ import com.google.android.gms.internal.d
 import android.support.design.widget.CoordinatorLayout.Behavior.setTag
 import android.support.v4.app.NotificationCompat
 import android.util.Log
-import com.firebase.jobdispatcher.FirebaseJobDispatcher
-import com.firebase.jobdispatcher.GooglePlayDriver
-import com.firebase.jobdispatcher.Job
 import com.google.firebase.messaging.RemoteMessage
+import hoosasack.pillnow.AlramActivity
 import hoosasack.pillnow.R
-
-
+import java.lang.Exception
 
 
 /**
@@ -32,6 +29,10 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         showNotification(remoteMessage!!.data["message"])
     }
 
+    override fun onSendError(str: String?, error: Exception?) {
+        Log.i("TEST", "error services")
+    }
+
     private fun showNotification(message: String?) {
 
         val i = Intent(this, MainActivity::class.java)
@@ -39,15 +40,24 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         val pendingIntent = PendingIntent.getActivity(this, 0, i, PendingIntent.FLAG_UPDATE_CURRENT)
 
+        val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val builder = NotificationCompat.Builder(this)
                 .setAutoCancel(true)
-                .setContentTitle("FCM Test")
+                .setContentTitle(" Pill Now !!! ")
                 .setContentText(message)
-                .setSmallIcon(R.drawable.common_google_signin_btn_icon_dark)
+                .setSmallIcon(R.drawable.ic_splash_logo)
                 .setContentIntent(pendingIntent)
+                .setSound(defaultSoundUri)
 
         val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         manager.notify(0, builder.build())
+        showAlramActivity(message)
+    }
+
+    private fun showAlramActivity(message: String?){
+        var intent : Intent = Intent(this, AlramActivity::class.java)
+        intent.putExtra(message, "message")
+        startActivity(intent)
     }
 }
