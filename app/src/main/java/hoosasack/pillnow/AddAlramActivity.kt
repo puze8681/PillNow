@@ -53,7 +53,7 @@ class AddAlramActivity : FontActivity() {
                     if (response?.code() === 200) {
                         progressDialog.dismiss()
 
-                        Toast.makeText(this@AddAlramActivity, "알람이 추가되어씁니다 . . .", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@AddAlramActivity, "알람이 추가되었습니다 . . .", Toast.LENGTH_SHORT).show()
                     } else if (response?.code() === 409) {
                         progressDialog.dismiss()
                         Toast.makeText(this@AddAlramActivity, response?.message(), Toast.LENGTH_SHORT).show()

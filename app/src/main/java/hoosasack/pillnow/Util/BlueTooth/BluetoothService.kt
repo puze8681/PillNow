@@ -1,14 +1,15 @@
 package hoosasack.pillnow.Util.BlueTooth
 
+import android.app.Activity
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
+import android.system.Os.kill
 import app.akexorcist.bluetotohspp.library.BluetoothSPP
 import hoosasack.pillnow.MainActivity
 import android.widget.Toast
 import app.akexorcist.bluetotohspp.library.BluetoothState
-
-
+import hoosasack.pillnow.AlramActivity
 
 
 /**
@@ -16,11 +17,9 @@ import app.akexorcist.bluetotohspp.library.BluetoothState
  */
 class BluetoothService : Service() {
 
-    lateinit var bt: BluetoothSPP
+    final val bt: BluetoothSPP = BluetoothSPP(applicationContext)
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-
-        bt = BluetoothSPP(applicationContext)
 
         if (!bt.isBluetoothAvailable) {
             Toast.makeText(applicationContext, "블루투스를 켜주세요", Toast.LENGTH_SHORT).show()
@@ -43,8 +42,6 @@ class BluetoothService : Service() {
         bt.setAutoConnectionListener(object : BluetoothSPP.AutoConnectionListener {
             override fun onNewConnection(name: String, address: String) {
 
-                //처음 연결될 떄 "C", 알람이 울릴 때 "R" 을 보낼거임
-                bt.send("C", false)
             }
             override fun onAutoConnectionStarted() {}
         })
@@ -54,6 +51,9 @@ class BluetoothService : Service() {
             mainIntent.putExtra("message", message)
             startActivity(mainIntent)
 
+            if(message=="O"){
+                onDestroy()
+            }
             //처음 연결될 때 "C", 알약통을 열었을 때 "O" 를 받을거임
         }
 
