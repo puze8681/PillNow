@@ -1,5 +1,6 @@
 package hoosasack.pillnow.Util.Map
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.app.Service
 import android.content.Context
@@ -10,11 +11,12 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.os.IBinder
 import android.provider.Settings
+import com.google.android.gms.maps.MapFragment
 
 /**
  * Created by parktaejun on 2017. 8. 16..
  */
-class GpsInfo(private val context : Context) : Service(), LocationListener{
+class GpsInfo(private val context: Context?) : Service(), LocationListener{
 
     // 현재 GPS 사용유무
     internal var isGPSEnabled = false
@@ -30,8 +32,8 @@ class GpsInfo(private val context : Context) : Service(), LocationListener{
         internal set
 
     internal var location: Location? = null
-    internal var lat: Double = 0.toDouble() // 위도
-    internal var lon: Double = 0.toDouble() // 경도
+    internal var lat: Double? = 0.toDouble() // 위도
+    internal var lon: Double? = 0.toDouble() // 경도
 
     protected var locationManager: LocationManager? = null
 
@@ -41,7 +43,7 @@ class GpsInfo(private val context : Context) : Service(), LocationListener{
 
     fun getLocation(): Location {
         try {
-            locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+            locationManager = context?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
             // GPS 정보 가져오기
             isGPSEnabled = locationManager!!.isProviderEnabled(LocationManager.GPS_PROVIDER)
@@ -69,12 +71,12 @@ class GpsInfo(private val context : Context) : Service(), LocationListener{
 
                 if (isGPSEnabled) {
                     if (location == null) {
-                        locationManager!!.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES.toFloat(), this)
+                        locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES.toFloat(), this)
                         if (locationManager != null) {
-                            location = locationManager!!.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                            location = locationManager?.getLastKnownLocation(LocationManager.GPS_PROVIDER)
                             if (location != null) {
-                                lat = location!!.latitude
-                                lon = location!!.longitude
+                                lat = location?.latitude
+                                lon = location?.longitude
                             }
                         }
                     }
@@ -96,7 +98,7 @@ class GpsInfo(private val context : Context) : Service(), LocationListener{
     /**
      * 위도값을 가져옵니다.
      */
-    val latitude: Double
+    val latitude: Double?
         get() {
             if (location != null) {
                 lat = location!!.latitude
@@ -107,7 +109,7 @@ class GpsInfo(private val context : Context) : Service(), LocationListener{
     /**
      * 경도값을 가져옵니다.
      */
-    val longitude: Double
+    val longitude: Double?
         get() {
             if (location != null) {
                 lon = location!!.longitude
@@ -125,7 +127,7 @@ class GpsInfo(private val context : Context) : Service(), LocationListener{
         alertDialog.setPositiveButton("Settings"
         ) { dialog, which ->
             val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-            context.startActivity(intent)
+            context?.startActivity(intent)
         }
         // Cancle 하면 종료 합니다.
         alertDialog.setNegativeButton("Cancel"

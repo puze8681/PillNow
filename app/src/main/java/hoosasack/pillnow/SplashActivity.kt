@@ -119,36 +119,35 @@ class SplashActivity : FontActivity() {
                             loginIntent.putExtra(token, "token")
                             startActivity(loginIntent)
                             finish()
-                            Toast.makeText(applicationContext, "로그인 성공 . . .", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@SplashActivity, "로그인 성공 . . .", Toast.LENGTH_SHORT).show()
                         }
                     } else if (response?.code() === 404) {
                         progressDialog.dismiss()
-                        Toast.makeText(applicationContext, "아이디 혹은 비밀번호가 옳지 않습니다 ... ", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@SplashActivity, "아이디 혹은 비밀번호가 옳지 않습니다 ... ", Toast.LENGTH_SHORT).show()
                     } else {
                         progressDialog.dismiss()
-                        Toast.makeText(applicationContext, "UNKNOWN ERR ... ", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@SplashActivity, "UNKNOWN ERR ... ", Toast.LENGTH_SHORT).show()
                     }
                 }
 
                 override fun onFailure(call: Call<Login>?, t: Throwable?) {
                     progressDialog.dismiss();
-                    Toast.makeText(applicationContext, "요청 불가 ... ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this@SplashActivity, "요청 불가 ... ", Toast.LENGTH_SHORT).show();
                 }
             })
         }
     }
 
     fun retrofitSetting() {
-        var url: String = "soylatte.kr:3000"
         var retrofit: Retrofit = Retrofit.Builder()
-                .baseUrl(url)
+                .baseUrl("https://soylatte.kr:3000")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
         retrofitService = retrofit.create(RetrofitService::class.java)
     }
 
     fun progressDialogSetting(){
-        progressDialog = ProgressDialog(applicationContext)
+        progressDialog = ProgressDialog(this@SplashActivity)
         progressDialog.setMessage("로그인 하는 중입니다")
         progressDialog.show()
     }

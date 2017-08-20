@@ -11,7 +11,6 @@ import android.widget.BaseAdapter
 import hoosasack.pillnow.Data.InformPillData
 import hoosasack.pillnow.R
 import kotlinx.android.synthetic.main.item_inform_content_double.view.*
-import hoosasack.pillnow.R.id.context
 /**
  * Created by parktaejun on 2017. 8. 12..
  */

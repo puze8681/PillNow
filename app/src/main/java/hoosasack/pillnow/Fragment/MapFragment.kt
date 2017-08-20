@@ -1,32 +1,27 @@
 package hoosasack.pillnow.Fragment
 
 import android.content.Context
-import android.content.Context.WINDOW_SERVICE
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Canvas
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
+import android.support.v4.app.FragmentManager
 import android.support.v7.widget.LinearLayoutManager
-import android.text.Layout
-import android.util.DisplayMetrics
-import android.view.*
-import android.widget.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.WindowManager
+import android.widget.TextView
+import android.widget.Toast
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
-import hoosasack.pillnow.Adapter.HomeAlramAdapter
-import hoosasack.pillnow.Adapter.HomeDetailAlramAdapter
 import hoosasack.pillnow.Adapter.MapListAdapter
-import hoosasack.pillnow.Data.HomeAlramData
 import hoosasack.pillnow.Data.MapListData
 import hoosasack.pillnow.Data.MarkerItemData
 import hoosasack.pillnow.R
+import hoosasack.pillnow.Util.Map.CustomInfoWindowAdapter
 import hoosasack.pillnow.Util.Map.GpsInfo
 import kotlinx.android.synthetic.main.actionbar_map.*
 import kotlinx.android.synthetic.main.actionbar_map_inform.*
 import kotlinx.android.synthetic.main.actionbar_map_list.*
-import kotlinx.android.synthetic.main.layout_home_detail.*
 import kotlinx.android.synthetic.main.layout_map.*
 import kotlinx.android.synthetic.main.layout_map_inform.*
 import kotlinx.android.synthetic.main.layout_map_list.*
@@ -34,43 +29,53 @@ import kotlin.properties.Delegates
 
 class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener {
 
-    lateinit var selectedMarker : Marker
+    var markerCheck : Boolean = false
     private var map by Delegates.notNull<GoogleMap>()
     var items: ArrayList<MapListData> = ArrayList()
     lateinit var adapter: MapListAdapter
-    var gpsInfo: GpsInfo = GpsInfo(context)
+    lateinit var gpsInfo: GpsInfo
     lateinit var marker: Marker
+    var selectedMarker : Marker? = null
 
-    lateinit var current: LatLng
+    val Context.windowManager : WindowManager
+        get() = getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater!!.inflate(R.layout.fragment_map, container, false)
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync(this)
 
+        markerCheck = false
+
+        var mapFragment : SupportMapFragment? = null
+        mapFragment = fragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+        mapFragment?.getMapAsync(this)
+
+        gpsInfo = GpsInfo(this@MapFragment.context)
         adapting()
 
-        btn_pill_list.setOnClickListener {
+        btn_current_location?.setOnClickListener{
+            setLocation()
+        }
+
+        btn_pill_list?.setOnClickListener {
             layout_fragment_map.visibility = View.GONE
             layout_fragment_map_list.visibility = View.VISIBLE
             layout_fragment_map_inform.visibility = View.GONE
         }
-        btn_back_inform.setOnClickListener {
+        btn_back_inform?.setOnClickListener {
             layout_fragment_map.visibility = View.VISIBLE
             layout_fragment_map_list.visibility = View.GONE
             layout_fragment_map_inform.visibility = View.GONE
         }
-        btn_search.setOnClickListener {
+        btn_search?.setOnClickListener {
             layout_fragment_map.visibility = View.GONE
             layout_fragment_map_list.visibility = View.GONE
             layout_fragment_map_inform.visibility = View.VISIBLE
         }
-        btn_back_list.setOnClickListener {
+        btn_back_list?.setOnClickListener {
             layout_fragment_map.visibility = View.VISIBLE
             layout_fragment_map_list.visibility = View.GONE
             layout_fragment_map_inform.visibility = View.GONE
@@ -80,56 +85,62 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
+
         var mMap = googleMap
 
-        // Add a marker in Sydney and move the camera
-        mMap.setMinZoomPreference(10F);
-        mMap.setInfoWindowAdapter(CustomInfoWindowAdapter(context))
-        map.setOnMarkerClickListener(this)
-        map.setOnMapClickListener(this)
-        getSampleMarkerItems()
         setLocation()
+        mMap.setMinZoomPreference(10F)
+        mMap.setInfoWindowAdapter(CustomInfoWindowAdapter(context))
+        getSampleMarkerItems()
 
-        btn_current_location.setOnClickListener{
-            setLocation()
-        }
+        map.setOnMapClickListener(this)
+        map.setOnMarkerClickListener(this)
 
-        btn_zoom_in.setOnClickListener {
+        btn_zoom_in?.setOnClickListener {
             map.animateCamera(CameraUpdateFactory.zoomIn())
         }
 
-        btn_zoom_out.setOnClickListener {
+        btn_zoom_out?.setOnClickListener {
             map.animateCamera(CameraUpdateFactory.zoomOut())
         }
     }
 
-
-
-    override fun onMarkerClick(p0: Marker?): Boolean {
+    override fun onMarkerClick(clickedMarker: Marker?): Boolean {
         var center : CameraUpdate = CameraUpdateFactory.newLatLng(marker.position)
         map.animateCamera(center)
-        changeSelectedMarker(marker)
+        markerCheck = true
+        selectedMarker = clickedMarker
+        changeSelectedMarker(clickedMarker)
         return true
     }
 
     override fun onMapClick(p0: LatLng?) {
+        markerCheck = false
+        selectedMarker = null
         changeSelectedMarker(null)
     }
 
-    fun changeSelectedMarker(marker : Marker?){
-        if(selectedMarker != null){
-            if(marker != null){
-                selectedMarker.hideInfoWindow()
-                marker.showInfoWindow()
-                selectedMarker = marker
-            }else{
-                selectedMarker.hideInfoWindow()
-                selectedMarker = null!!
+    fun changeSelectedMarker(changedMarker : Marker?){
+        if(markerCheck != false){
+            //마커 -> 마커 클릭
+            if(changedMarker != null){
+                selectedMarker?.hideInfoWindow()
+                changedMarker.showInfoWindow()
+                selectedMarker = changedMarker
+                markerCheck = true
+            }
+            //마커 -> 바탕 클릭
+            else{
+                selectedMarker?.hideInfoWindow()
+                selectedMarker = null
+                markerCheck = true
             }
         }else{
-            if(marker != null){
+            //바탕 -> 마커 클릭
+            if(changedMarker != null){
                 marker.showInfoWindow()
-                selectedMarker = marker
+                selectedMarker = changedMarker
+                markerCheck = true
             }else{
             }
         }
@@ -144,11 +155,6 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         map.addMarker(markerOptions)
     }
 
-
-    val Context.windowManager: WindowManager
-        get() = getSystemService(Context.WINDOW_SERVICE) as WindowManager
-
-
     private fun setLocation() {
         var isSuccess: Boolean = false
         var currentIcon: BitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.ic_map_current_position)
@@ -158,8 +164,8 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
             }
         }
         if (isSuccess) {
-            marker = map.addMarker(MarkerOptions().icon(currentIcon).position(LatLng(gpsInfo.lat, gpsInfo.lon)))
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(gpsInfo.lat, gpsInfo.lon), 17.0f))
+            marker = map.addMarker(MarkerOptions().icon(currentIcon).position(LatLng(gpsInfo.lat as Double, gpsInfo.lon as Double)))
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(gpsInfo.lat as Double, gpsInfo.lon as Double), 17.0f))
         } else {
             Toast.makeText(context, "자신의 위치 불러오기 실패", 0)
         }
@@ -174,32 +180,6 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         for (i in markerList) {
             addMarker(i)
         }
-    }
-
-    private class CustomInfoWindowAdapter(private var context: Context) : GoogleMap.InfoWindowAdapter {
-
-        private lateinit final var infoWindow: View
-
-        init {
-            infoWindow = View.inflate(context, R.layout.item_marker, null)
-        }
-
-        override fun getInfoWindow(marker: Marker?): View {
-
-            var title: String = marker!!.title
-            var location: String = marker!!.snippet
-            var titleText: TextView = infoWindow.findViewById(R.id.title)
-            var locationText: TextView = infoWindow.findViewById(R.id.location)
-            titleText.text = title
-            locationText.text = location
-
-            return infoWindow
-        }
-
-        override fun getInfoContents(marker: Marker?): View? {
-            return null
-        }
-
     }
 
     private fun adapting() {

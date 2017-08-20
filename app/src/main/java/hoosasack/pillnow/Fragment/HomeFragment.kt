@@ -4,18 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.TextView
 import hoosasack.pillnow.Adapter.*
 import hoosasack.pillnow.AddAlramActivity
 import hoosasack.pillnow.Data.HomeAlramData
 import hoosasack.pillnow.Data.HomeDetailAlramData
 import hoosasack.pillnow.Data.HomeDetailDetailContentData
-import hoosasack.pillnow.Data.InformProhibitedAllergyData
 import hoosasack.pillnow.R
 import kotlinx.android.synthetic.main.actionbar_home_detail.*
 import kotlinx.android.synthetic.main.actionbar_home_detail_detail.*
@@ -46,7 +42,7 @@ class HomeFragment : Fragment() {
 
         adapting()
 
-        adapter.itemClick = object : HomeAlramAdapter.ItemClick {
+        adapter?.itemClick = object : HomeAlramAdapter.ItemClick {
             override fun onItemClick(view: View?, position: Int) {
 
                 layout_fragment_home.visibility = View.GONE
@@ -59,13 +55,13 @@ class HomeFragment : Fragment() {
 
         }
 
-        btn_back_detail.setOnClickListener{
+        btn_back_detail?.setOnClickListener{
             layout_fragment_home.visibility = View.VISIBLE
             layout_fragment_home_detail.visibility = View.GONE
             layout_fragment_home_detail_detail.visibility = View.GONE
         }
 
-        main_content_detail.setOnClickListener{
+        main_content_detail?.setOnClickListener{
             layout_fragment_home.visibility = View.GONE
             layout_fragment_home_detail.visibility = View.GONE
             layout_fragment_home_detail_detail.visibility = View.VISIBLE
@@ -75,13 +71,13 @@ class HomeFragment : Fragment() {
             content_detail_detail.text = content_detail.text
         }
 
-        btn_back_detail_detail.setOnClickListener{
+        btn_back_detail_detail?.setOnClickListener{
             layout_fragment_home.visibility = View.GONE
             layout_fragment_home_detail.visibility = View.VISIBLE
             layout_fragment_home_detail_detail.visibility = View.GONE
         }
 
-        btn_add_alram_detail.setOnClickListener{
+        btn_add_alram_detail?.setOnClickListener{
             val intent = Intent(context, AddAlramActivity::class.java)
             startActivity(intent)
         }

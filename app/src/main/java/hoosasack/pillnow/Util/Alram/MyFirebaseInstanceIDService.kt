@@ -24,23 +24,24 @@ class MyFirebaseInstanceIDService : FirebaseInstanceIdService() {
         sendRegistrationToServer(refreshedToken);
     }
 
-    private fun sendRegistrationToServer(token : String?){
+    private fun sendRegistrationToServer(token : String?): Unit? {
 
-        val client = OkHttpClient()
-        val body = FormBody.Builder()
-                .add("Token", token)
-                .build()
+//        val client = OkHttpClient()
+//        val body = FormBody.Builder()
+//                .add("Token", token)
+//                .build()
+//
+//        val request = Request.Builder()
+//                .url("https://soylatte.kr:3000/push")
+//                .post(body)
+//                .build()
+//
+//        try {
+//            client.newCall(request).execute()
+//        } catch (e: IOException) {
+//            e.printStackTrace()
+//        }
 
-        val request = Request.Builder()
-                .url("soylatte.kr:3000/push")
-                .post(body)
-                .build()
-
-        try {
-            client.newCall(request).execute()
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-
+        return null
     }
 }

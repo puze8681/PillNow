@@ -4,6 +4,8 @@ import android.graphics.drawable.Drawable
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.view.ViewPager
+import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.messaging.FirebaseMessaging
 import hoosasack.pillnow.Adapter.FragmentPagerAdapter
 import hoosasack.pillnow.Util.Font.FontActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -13,6 +15,9 @@ class MainActivity : FontActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        FirebaseMessaging.getInstance().subscribeToTopic("news")
+        FirebaseInstanceId.getInstance().getToken()
 
         val viewPagerAdapter: FragmentPagerAdapter = FragmentPagerAdapter(supportFragmentManager)
         viewPager.adapter = viewPagerAdapter

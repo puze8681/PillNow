@@ -40,8 +40,6 @@ class BluetoothService : Service() {
             }
         })
 
-        onStart()
-
         bt.setAutoConnectionListener(object : BluetoothSPP.AutoConnectionListener {
             override fun onNewConnection(name: String, address: String) {
 
@@ -71,6 +69,10 @@ class BluetoothService : Service() {
         super.onDestroy()
     }
 
+    fun setup(){
+        bt.autoConnect("pillnow")
+    }
+
     fun onStart(){
         if (!bt.isBluetoothEnabled()) {
             bt.enable()
@@ -81,9 +83,5 @@ class BluetoothService : Service() {
                 setup()
             }
         }
-    }
-
-    fun setup(){
-        bt.autoConnect("pillnow")
     }
 }
