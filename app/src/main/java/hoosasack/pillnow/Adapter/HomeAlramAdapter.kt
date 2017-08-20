@@ -13,6 +13,7 @@ import hoosasack.pillnow.Data.HomeAlramData
 import kotlinx.android.synthetic.main.item_home_alram.*
 import kotlinx.android.synthetic.main.item_home_alram.view.*
 import android.support.v4.content.ContextCompat
+import com.squareup.picasso.Picasso
 import hoosasack.pillnow.R
 
 
@@ -39,7 +40,7 @@ class HomeAlramAdapter(private val context : Context, private var items : ArrayL
             itemView.layoutParams = params
         }
         fun bind(item: HomeAlramData) {
-            itemView.image.setImageDrawable(ContextCompat.getDrawable(context, item.image))
+            Picasso.with(context).load(item.image).into(itemView.image)
             itemView.name.text = item.name
             itemView.content.text = item.content
             when(item.switch){

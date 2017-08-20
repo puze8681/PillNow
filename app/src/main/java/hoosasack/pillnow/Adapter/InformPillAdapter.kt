@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import com.squareup.picasso.Picasso
 import hoosasack.pillnow.Data.InformPillData
 import hoosasack.pillnow.R
 import kotlinx.android.synthetic.main.item_inform_content_double.view.*
@@ -38,7 +39,7 @@ class InformPillAdapter(private val context : Context, items: List<InformPillDat
         var view: View? = convertView as? View
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         view = inflater.inflate(R.layout.item_inform_content_double, null)
-        view.image.setImageDrawable(ContextCompat.getDrawable(context, items.get(i).image))
+        Picasso.with(context).load(items.get(i).image).into(view.image)
         view.name.text = items.get(i).name
         view.content.text = items.get(i).content
         return view

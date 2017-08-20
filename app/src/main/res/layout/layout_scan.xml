@@ -20,6 +20,7 @@
         android:layout_height="wrap_content" />
 
     <ImageView
+        android:src="@drawable/ic_barcode"
         android:id="@+id/btn_camera"
         android:layout_marginTop="100dp"
         android:layout_marginBottom="100dp"

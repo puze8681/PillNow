@@ -66,8 +66,7 @@ class InformFragment : Fragment() {
                     var len = user?.size!!.toInt()
                     for(i in 0..len){
                         var jsons : JsonObject = user[i].userList
-                        var image : String = jsons.get("image").toString()
-//                        itemsCurrent[i].image = Picasso.with(context).load(image)
+                        itemsCurrent[i].image = jsons.get("image").toString()
                         itemsCurrent[i].name = jsons.get("name").toString()
                         itemsCurrent[i].content = jsons.get("content").toString()
                     }
