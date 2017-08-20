@@ -199,8 +199,6 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
-
-
         return view
     }
 

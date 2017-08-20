@@ -49,10 +49,11 @@ class RegisterActivity : FontActivity() {
             btn_female.setTextColor(R.color.white)
             sex = "female"
         }
-        btn_after.setOnClickListener {
-            startActivity(afterIntent)
-        }
         btn_before.setOnClickListener {
+            startActivity(afterIntent)
+            finish()
+        }
+        btn_after.setOnClickListener {
             progressDialogSetting()
             var call: Call<SignUp> = retrofitService.signup(id.toString().trim(), pw.toString().trim(), age.toString().trim(), sex, name.toString().trim())
             call.enqueue(object : Callback<SignUp> {

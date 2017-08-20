@@ -15,6 +15,7 @@ interface RetrofitService {
     @POST("/auth/login")
     fun login(@Field("id") id: String, @Field("password") password: String): retrofit2.Call<Login>
 
+    @FormUrlEncoded
     @POST("/auth/signup")
     fun signup(@Field("id") id: String, @Field("password") password: String, @Field("age") age: String, @Field("sex") sex: String, @Field("name") name: String): retrofit2.Call<SignUp>
 
@@ -27,6 +28,7 @@ interface RetrofitService {
     @GET("/medicine/userList?")
     fun medicineUserList(@Field("token") token: String): retrofit2.Call<List<MedicineUserList>>
 
+    @FormUrlEncoded
     @POST("/medicine/delete")
     fun medicineDelete(@Field("token") token: String, @Field("number") number: String): retrofit2.Call<List<MedicineDelete>>
 

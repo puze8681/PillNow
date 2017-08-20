@@ -17,9 +17,11 @@ import hoosasack.pillnow.AlramActivity
  */
 class BluetoothService : Service() {
 
-    final val bt: BluetoothSPP = BluetoothSPP(applicationContext)
+    lateinit var bt: BluetoothSPP
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+
+        bt = BluetoothSPP(applicationContext)
 
         if (!bt.isBluetoothAvailable) {
             Toast.makeText(applicationContext, "블루투스를 켜주세요", Toast.LENGTH_SHORT).show()
