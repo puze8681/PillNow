@@ -172,8 +172,8 @@ class SplashActivity : FontActivity() {
         val thread: Thread = Thread {
             try {
                 var term = 0
-                while (term < 3500) {
-                    sleep(100)
+                while (term < 3000) {
+                    sleep(60)
                     term += 100
                 }
 //                val loginIntent = Intent(this, LoginActivity::class.java)
