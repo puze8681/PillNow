@@ -102,7 +102,7 @@ class InformFragment : Fragment() {
 
     fun retrofitSetting() {
         var retrofit: Retrofit = Retrofit.Builder()
-                .baseUrl("https://soylatte.kr:3000")
+                .baseUrl("http://soylatte.kr:3000")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
         retrofitService = retrofit.create(RetrofitService::class.java)

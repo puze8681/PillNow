@@ -80,7 +80,6 @@ class RegisterActivity : FontActivity() {
                         Toast.makeText(this@RegisterActivity, "UNKNOWN ERR ... ", Toast.LENGTH_SHORT).show()
                     }
                 }
-
                 override fun onFailure(call: Call<SignUp>?, t: Throwable?) {
                     progressDialog.dismiss();
                     Toast.makeText(this@RegisterActivity, "요청 불가 ... ", Toast.LENGTH_SHORT).show();
@@ -91,7 +90,7 @@ class RegisterActivity : FontActivity() {
 
     fun retrofitSetting() {
         var retrofit: Retrofit = Retrofit.Builder()
-                .baseUrl("https://soylatte.kr:3000")
+                .baseUrl("http://soylatte.kr:3000")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
         retrofitService = retrofit.create(RetrofitService::class.java)
