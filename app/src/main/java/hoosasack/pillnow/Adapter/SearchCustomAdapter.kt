@@ -42,6 +42,13 @@ class SearchCustomAdapter(private val context : Context, items: List<SearchCusto
         view.image.setImageDrawable(ContextCompat.getDrawable(context, items.get(i).image))
         view.name.text = items.get(i).name
         view.content.text = items.get(i).content
+
         return view
+    }
+
+    var itemClick: ItemClick? = null
+
+    interface ItemClick {
+        fun onItemClick(view: View?, position: Int)
     }
 }

@@ -12,12 +12,8 @@ import hoosasack.pillnow.R
 
 class SettingFragment : Fragment() {
 
-//    Intent intent = new Intent.getIntent()
-//    String token = intent.getExtra().getString("token")
-
-    var bundle : Bundle = this.arguments
-    var token  = bundle.getString("token")
-
+    var intent : Intent = Intent()
+    var token = intent.getStringExtra("token")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -21,8 +21,8 @@ import kotlinx.android.synthetic.main.layout_home_detail_detail.*
 
 class HomeFragment : Fragment() {
 
-    var bundle : Bundle = this.arguments
-    var token  = bundle.getString("token")
+    var intent : Intent = Intent()
+    var token = intent.getStringExtra("token")
 
     var items: ArrayList<HomeAlramData> = ArrayList()
     lateinit var adapter: HomeAlramAdapter
@@ -82,8 +82,11 @@ class HomeFragment : Fragment() {
 
         btn_add_alram_detail?.setOnClickListener{
             val intent = Intent(context, AddAlramActivity::class.java)
+            intent.putExtra(title_detail.text.toString().trim(), "text")
             startActivity(intent)
         }
+
+
 
         return view
     }

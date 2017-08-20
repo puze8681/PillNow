@@ -22,7 +22,7 @@ interface RetrofitService {
     fun location(@Path("latitude") latitude: String, @Field("longitude") longitude: String): retrofit2.Call<Location>
 
     @GET("/medicine/getData?")
-    fun medicine(@Path("medicNum") medicNum: String, @Field("token") token: String): retrofit2.Call<MedicineSchema>
+    fun medicine(@Path("medicNum") medicNum: String, @Field("token") token: String): retrofit2.Call<Medicine>
 
     @GET("/medicine/userList?")
     fun medicineUserList(@Field("token") token: String): retrofit2.Call<List<MedicineUserList>>
@@ -31,7 +31,7 @@ interface RetrofitService {
     fun medicineDelete(@Field("token") token: String, @Field("number") number: String): retrofit2.Call<List<MedicineDelete>>
 
     @GET("/alarm/setting?")
-    fun alarm(@Path("token") latitude: String, @Field("name") longitude: String): retrofit2.Call<Alarm>
+    fun alarm(@Path("token") token: String, @Field("name") name: String, @Field("title") title: String): retrofit2.Call<Alarm>
 
     @GET("/push")
     fun push(@Path("token") token: String, @Path("fcm") fcm: String): retrofit2.Call<Push>

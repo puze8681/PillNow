@@ -41,8 +41,8 @@ import kotlin.properties.Delegates
 
 class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener {
 
-    var bundle : Bundle = this.arguments
-    var token  = bundle.getString("token")
+    var intent : Intent = Intent()
+    var token = intent.getStringExtra("token")
 
     lateinit var retrofitService: RetrofitService
     lateinit var progressDialog: ProgressDialog
