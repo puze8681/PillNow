@@ -3,6 +3,8 @@ package hoosasack.pillnow
 import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Window
+import android.view.WindowManager
 import hoosasack.pillnow.Adapter.AlramAdapter
 import hoosasack.pillnow.Data.AlramData
 import hoosasack.pillnow.Util.Font.FontActivity
@@ -21,6 +23,10 @@ class AlramActivity : FontActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_alram)
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        setContentView(R.layout.activity_splash)
 
         adapter = AlramAdapter(context, items)
 

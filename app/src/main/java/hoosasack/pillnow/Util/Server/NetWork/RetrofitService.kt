@@ -31,7 +31,10 @@ interface RetrofitService {
     fun medicineDelete(@Field("token") token: String, @Field("number") number: String): retrofit2.Call<List<MedicineDelete>>
 
     @GET("/alarm/setting?")
-    fun alarm(@Path("token") token: String, @Field("name") name: String, @Field("title") title: String): retrofit2.Call<Alarm>
+    fun alarm(@Path("token") token: String, @Field("number") name: String, @Field("time") title: String): retrofit2.Call<Alarm>
+
+    @GET("/alarm/setting?")
+    fun loadAlarm(@Path("token") token: String, @Field("number") name: String): retrofit2.Call<List<LoadAlarm>>
 
     @GET("/push")
     fun push(@Path("token") token: String, @Path("fcm") fcm: String): retrofit2.Call<Push>
