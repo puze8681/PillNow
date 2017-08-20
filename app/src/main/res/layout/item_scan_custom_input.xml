@@ -9,7 +9,7 @@
     tools:ignore="MissingPrefix">
 
     <LinearLayout
-        android:id="@+id/item_inform_content_double"
+        android:id="@+id/item_scan_custom_input"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
@@ -35,19 +35,19 @@
                 android:layout_marginLeft="16dp"
                 android:layout_weight="1"
                 android:gravity="center|left"
-                android:text="아세트아미노정 500mg"
+                android:text="자누비아정 100mg"
                 android:textColor="@color/orange"
                 android:textSize="15sp"
                 app:font="bold" />
 
             <TextView
-                android:id="@+id/content"
+                android:id="@+id/pid"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginLeft="16dp"
                 android:layout_weight="1"
                 android:gravity="center|left"
-                android:text="일 3회 / 식후 30분"
+                android:text="PID : XXXXXXXX"
                 android:textColor="@color/textBlack"
                 android:textSize="13sp"
                 app:font="normal" />

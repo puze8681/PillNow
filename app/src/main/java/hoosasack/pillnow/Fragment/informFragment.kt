@@ -19,6 +19,9 @@ import kotlinx.android.synthetic.main.fragment_inform.*
 
 class InformFragment : Fragment() {
 
+    var bundle : Bundle = this.arguments
+    var token  = bundle.getString("token")
+
     var itemsChronic: ArrayList<InformPillData> = ArrayList()
     var itemsCurrent: ArrayList<InformPillData> = ArrayList()
     var itemsProhibited: ArrayList<InformProhibitedAllergyData> = ArrayList()

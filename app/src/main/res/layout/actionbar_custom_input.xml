@@ -18,7 +18,7 @@
         android:layout_height="wrap_content" />
 
     <EditText
-        android:hint="약국을 검색해 보세요."
+        android:hint="PID 또는 약품이름을 검색해 보세요."
         style="@style/EditTextSearchStyle"
         android:layout_toLeftOf="@+id/btn_search"
         android:layout_toRightOf="@+id/btn_back"
@@ -31,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
-        android:id="@+id/search_store" />
+        android:id="@+id/search_pill" />
 
     <ImageView
         android:id="@+id/btn_search"

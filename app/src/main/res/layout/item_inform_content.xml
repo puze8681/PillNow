@@ -8,7 +8,7 @@
     tools:ignore="MissingPrefix"
     android:layout_height="70dp">
     <LinearLayout
-        android:id="@+id/layout_item_alram"
+        android:id="@+id/item_inform_content"
         android:weightSum="20"
         android:orientation="horizontal"
         android:layout_width="match_parent"

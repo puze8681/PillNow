@@ -1,6 +1,8 @@
 package hoosasack.pillnow.Fragment
 
+import android.app.ProgressDialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
@@ -16,19 +18,34 @@ import com.google.android.gms.maps.model.*
 import hoosasack.pillnow.Adapter.MapListAdapter
 import hoosasack.pillnow.Data.MapListData
 import hoosasack.pillnow.Data.MarkerItemData
+import hoosasack.pillnow.MainActivity
 import hoosasack.pillnow.R
 import hoosasack.pillnow.Util.Map.CustomInfoWindowAdapter
 import hoosasack.pillnow.Util.Map.GpsInfo
+import hoosasack.pillnow.Util.Server.Data.Location
+import hoosasack.pillnow.Util.Server.Data.Login
+import hoosasack.pillnow.Util.Server.NetWork.RetrofitService
 import kotlinx.android.synthetic.main.actionbar_map.*
 import kotlinx.android.synthetic.main.actionbar_map_inform.*
 import kotlinx.android.synthetic.main.actionbar_map_list.*
+import kotlinx.android.synthetic.main.activity_splash.*
 import kotlinx.android.synthetic.main.layout_map.*
 import kotlinx.android.synthetic.main.layout_map_inform.*
 import kotlinx.android.synthetic.main.layout_map_list.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import kotlin.properties.Delegates
 
 class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener {
 
+    var bundle : Bundle = this.arguments
+    var token  = bundle.getString("token")
+
+    lateinit var retrofitService: RetrofitService
+    lateinit var progressDialog: ProgressDialog
     var markerCheck : Boolean = false
     private var map by Delegates.notNull<GoogleMap>()
     var items: ArrayList<MapListData> = ArrayList()
@@ -91,7 +108,6 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         setLocation()
         mMap.setMinZoomPreference(10F)
         mMap.setInfoWindowAdapter(CustomInfoWindowAdapter(context))
-        getSampleMarkerItems()
 
         map.setOnMapClickListener(this)
         map.setOnMarkerClickListener(this)
@@ -166,20 +182,58 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         if (isSuccess) {
             marker = map.addMarker(MarkerOptions().icon(currentIcon).position(LatLng(gpsInfo.lat as Double, gpsInfo.lon as Double)))
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(gpsInfo.lat as Double, gpsInfo.lon as Double), 17.0f))
+            getStore(gpsInfo.lat as String, gpsInfo.lon as String)
         } else {
             Toast.makeText(context, "자신의 위치 불러오기 실패", 0)
         }
     }
 
-    private fun getSampleMarkerItems() {
+    private fun getStore(lat : String, lon : String) {
+        progressDialogSetting()
         var markerList: ArrayList<MarkerItemData> = ArrayList()
+        var call: Call<Location> = retrofitService.location(lat, lon)
+        call.enqueue(object : Callback<Location>{
+            override fun onResponse(call: Call<Location>?, response: Response<Location>?) {
+                if (response?.code() === 200) {
+                    progressDialog.dismiss()
+                    val user = response?.body()
+                    if (user != null) {
+                        Toast.makeText(this@MapFragment.context, "약국 위치 불러오기 성공 . . .", Toast.LENGTH_SHORT).show()
+                    }
+                } else if (response?.code() === 404) {
+                    progressDialog.dismiss()
+                    Toast.makeText(this@MapFragment.context, "약국 위치 불러오기 실패... ", Toast.LENGTH_SHORT).show()
+                } else {
+                    progressDialog.dismiss()
+                    Toast.makeText(this@MapFragment.context, "UNKNOWN ERR ... ", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<Location>?, t: Throwable?) {
+                progressDialog.dismiss();
+                Toast.makeText(this@MapFragment.context, "요청 불가 ... ", Toast.LENGTH_SHORT).show();
+            }
+        })
 
         //List this ... add marker
         //markerList.add(MarkerItemData(12.0, 13.1, "check", "check"))
-
         for (i in markerList) {
             addMarker(i)
         }
+    }
+
+    fun retrofitSetting() {
+        var retrofit: Retrofit = Retrofit.Builder()
+                .baseUrl("https://soylatte.kr:3000")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+        retrofitService = retrofit.create(RetrofitService::class.java)
+    }
+
+    fun progressDialogSetting(){
+        progressDialog = ProgressDialog(this@MapFragment.context)
+        progressDialog.setMessage("로그인 하는 중입니다")
+        progressDialog.show()
     }
 
     private fun adapting() {

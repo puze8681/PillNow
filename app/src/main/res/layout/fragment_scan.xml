@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_map_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="hoosasack.pillnow.Fragment.ScanFragment">
+    tools:context="hoosasack.pillnow.Fragment.ScanFragment"
+    tools:ignore="MissingPrefix">
 
-    <include layout="@layout/actionbar_scan"/>
+    <include layout="@layout/layout_scan"
+        android:id="@+id/layout_scan"
+        android:visibility="visible"/>
+    <include layout="@layout/layout_custom_input"
+        android:id="@+id/layout_scan_custom_input"
+        android:visibility="gone"/>
 
-
-
-</LinearLayout>
+</RelativeLayout>

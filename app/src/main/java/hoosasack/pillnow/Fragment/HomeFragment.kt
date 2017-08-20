@@ -21,6 +21,9 @@ import kotlinx.android.synthetic.main.layout_home_detail_detail.*
 
 class HomeFragment : Fragment() {
 
+    var bundle : Bundle = this.arguments
+    var token  = bundle.getString("token")
+
     var items: ArrayList<HomeAlramData> = ArrayList()
     lateinit var adapter: HomeAlramAdapter
 

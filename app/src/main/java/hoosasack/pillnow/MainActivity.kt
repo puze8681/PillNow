@@ -16,7 +16,7 @@ class MainActivity : FontActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        FirebaseMessaging.getInstance().subscribeToTopic("news")
+        FirebaseMessaging.getInstance().subscribeToTopic("alarm")
         FirebaseInstanceId.getInstance().getToken()
 
         val viewPagerAdapter: FragmentPagerAdapter = FragmentPagerAdapter(supportFragmentManager)

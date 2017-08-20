@@ -1,13 +1,23 @@
 package hoosasack.pillnow.Fragment
 
+import android.content.Intent
+import android.content.Intent.getIntent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.app.NotificationCompat.getExtras
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import hoosasack.pillnow.R
 
 class SettingFragment : Fragment() {
+
+//    Intent intent = new Intent.getIntent()
+//    String token = intent.getExtra().getString("token")
+
+    var bundle : Bundle = this.arguments
+    var token  = bundle.getString("token")
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
